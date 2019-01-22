@@ -1,0 +1,14 @@
+name: dart_traver
+version: 1.0.0
+author: Ewald Horn <ewald@nofuss.co.za>
+description: Attempting to do some ray tracing in Dart.
+homepage: https://www.nofuss.co.za
+environment:
+  sdk: '>=2.0.0-dev.17.0 <3.0.0'
+dependencies:
+  collection: '^1.0.0'
+  convert: '>=1.0.0 <3.0.0'
+  typed_data: '^1.0.0'
+  image: '>=2.0.5'
+dev_dependencies:
+  test: ^1.0.0
