@@ -13,9 +13,9 @@ import 'lighting.dart';
  * Open it via the default Mac app.
  */
 
-Vector3 point, N; // point is aka hit
-double diffuse_light_intensity = 0.0;
-Material material = Material(Pixel(0, 0, 128));
+// Globals - Ugh
+// ToDo - Clean this mess up
+Vector3 hit, N; // point is aka hit
 
 void main() {
   const filename = "drawlighting.png";
@@ -59,13 +59,13 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
   double spheresDistance = double.maxFinite;
 
   for (var i = 0; i < spheres.length; i++) {
-    double dist_i = 0.0;
+    double dist_i = 10.0;
 
     if (spheres[i].rayIntersect(origin, direction, dist_i) &&
         (dist_i < spheresDistance)) {
       spheresDistance = dist_i;
-      point = origin + direction.timesDouble(dist_i);
-      N = (point - spheres[i].center);
+      hit = origin + direction.timesDouble(dist_i);
+      N = (hit - spheres[i].center);
       N = N.normalise();
       material.setDiffuseColour(spheres[i].material.diffuseColour);
     }
@@ -76,17 +76,15 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
 
 Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres,
     List<Lighting> lights) {
-
+  Material material = Material(Pixel(0, 0, 128));      
   if (!sceneIntersect(origin, direction, spheres, material)) {
     return Pixel.fromFraction(0.2, 0.7, 0.8);
   }
-
-  diffuse_light_intensity = 0.0; // important to reset between casts
+  double diffuse_light_intensity = 0.0;
 
   for (var i = 0; i < lights.length; i++) {
-    Vector3 lightdir = (lights[i].position - point);
+    Vector3 lightdir = (lights[i].position - hit);
     lightdir = lightdir.normalise();
-
     diffuse_light_intensity += lights[i].intensity * max(0.0, lightdir & N);
   }
 

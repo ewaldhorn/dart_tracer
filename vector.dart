@@ -9,6 +9,10 @@ class Vector3 {
     this.z = z;
   }
 
+  String toString() {
+    return "Instance of Vector3(${x}, ${y}, ${z})";
+  }
+
   double norm() {
     return sqrt(x * x + y * y + z * z);
   }
