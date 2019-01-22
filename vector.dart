@@ -21,6 +21,10 @@ class Vector3 {
     return this;
   }
 
+  timesDouble(double d) {
+    return Vector3(this.x * d, this.y * d, this.z * d);
+  }
+
   operator -(Vector3 vec) {
     return Vector3(this.x - vec.x, this.y - vec.y, this.z - vec.z);
   }

@@ -22,7 +22,7 @@ void main() {
 
   // Image is prepped - draw!
 
-  Sphere sphere = Sphere(Vector3(-3, 0, -16), 2.0);
+  Sphere sphere = Sphere(Vector3(-3, 0, -16), 2.0, null);
 
   for (var x = 0; x < width; x++) {
     for (var y = 0; y < height; y++) {

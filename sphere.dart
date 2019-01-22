@@ -1,13 +1,16 @@
 import 'dart:math';
 import 'vector.dart';
+import 'material.dart';
 
 class Sphere {
   Vector3 center;
   double radius;
+  Material material;
 
-  Sphere(Vector3 center, double radius) {
+  Sphere(Vector3 center, double radius, Material material) {
     this.center = center;
     this.radius = radius;
+    this.material = material;
   }
 
   bool rayIntersect(Vector3 origin, Vector3 direction, double t0) {
@@ -17,7 +20,7 @@ class Sphere {
 
     if (d2 > radius * radius) return false;
 
-    double thc = sqrt(radius * radius  - d2);
+    double thc = sqrt(radius * radius - d2);
     t0 = tca - thc;
     double t1 = tca + thc;
 
