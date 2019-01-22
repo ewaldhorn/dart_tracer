@@ -33,8 +33,6 @@ void main() {
     }
   }
 
-  // Draw Sphere
-
   // Convert to pixels
   List imagePixels = im.getBytes();
   var pixelpos = 0;
