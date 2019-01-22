@@ -5,17 +5,22 @@ import 'vector.dart';
 import 'sphere.dart';
 import 'postprocessor.dart';
 import 'material.dart';
+import 'lighting.dart';
 
 /**
- * Draw a lot of spheres!
+ * Draw spheres, with ligthing.
  * Save it as a PNG.
  * Open it via the default Mac app.
  */
 
+Vector3 point, N; // point is aka hit
+double diffuse_light_intensity = 0.0;
+Material material = Material(Pixel(0, 0, 128));
+
 void main() {
-  const filename = "allthespheres.png";
-  const width = 640;
-  const height = 480;
+  const filename = "drawlighting.png";
+  const width = 1024;
+  const height = 768;
   const FOV = pi / 2.0;
 
   List<Pixel> pixels = List<Pixel>(width * height);
@@ -32,13 +37,17 @@ void main() {
   spheres.add(Sphere(Vector3(1.5, -0.5, -18), 3.0, red_rubber));
   spheres.add(Sphere(Vector3(7, 5, -18), 4.0, ivory));
 
+  List<Lighting> lights = List<Lighting>();
+  lights.add(Lighting(Vector3(-20, 20, 20), 1.5));
+
   // Ray casting is triggered from here
   for (var x = 0; x < width; x++) {
     for (var y = 0; y < height; y++) {
       double xp = (2 * (x + 0.5) / width - 1) * tan(FOV / 2.0) * width / height;
       double yp = -(2 * (y + 0.5) / height - 1) * tan(FOV / 2.0);
       Vector3 direction = Vector3(xp, yp, -1).normalise();
-      pixels[x + (y * width)] = castRay(Vector3(0, 0, 0), direction, spheres);
+      pixels[x + (y * width)] =
+          castRay(Vector3(0, 0, 0), direction, spheres, lights);
     }
   }
 
@@ -46,7 +55,7 @@ void main() {
 }
 
 bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
-    Vector3 hit, Vector3 N, Material material) {
+    Material material) {
   double spheresDistance = double.maxFinite;
 
   for (var i = 0; i < spheres.length; i++) {
@@ -55,8 +64,8 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
     if (spheres[i].rayIntersect(origin, direction, dist_i) &&
         (dist_i < spheresDistance)) {
       spheresDistance = dist_i;
-      hit = origin + direction.timesDouble(dist_i);
-      N = (hit - spheres[i].center);
+      point = origin + direction.timesDouble(dist_i);
+      N = (point - spheres[i].center);
       N = N.normalise();
       material.setDiffuseColour(spheres[i].material.diffuseColour);
     }
@@ -65,13 +74,21 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
   return spheresDistance < 1000;
 }
 
-Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres) {
-  Vector3 point, N;
-  Material material = Material(Pixel(0, 0, 128));
+Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres,
+    List<Lighting> lights) {
 
-  if (!sceneIntersect(origin, direction, spheres, point, N, material)) {
+  if (!sceneIntersect(origin, direction, spheres, material)) {
     return Pixel.fromFraction(0.2, 0.7, 0.8);
   }
 
-  return material.diffuseColour;
+  diffuse_light_intensity = 0.0; // important to reset between casts
+
+  for (var i = 0; i < lights.length; i++) {
+    Vector3 lightdir = (lights[i].position - point);
+    lightdir = lightdir.normalise();
+
+    diffuse_light_intensity += lights[i].intensity * max(0.0, lightdir & N);
+  }
+
+  return material.timesDouble(diffuse_light_intensity);
 }
