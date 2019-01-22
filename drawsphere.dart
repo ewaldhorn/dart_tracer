@@ -62,8 +62,8 @@ Pixel castRay(Vector3 origin, Vector3 direction, Sphere sphere) {
   double sphere_dist = double.maxFinite;
 
   if (!sphere.rayIntersect(origin, direction, sphere_dist)) {
-    return Pixel(128, 128, 128);
+    return Pixel(0.2, 0.7, 0.8); // background colour
   }
 
-  return Pixel(255, 0, 0);
+  return Pixel(0.4, 0.4, 0.3);
 }

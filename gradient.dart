@@ -21,8 +21,8 @@ void main() {
 
   for (var x = 0; x < width; x++) {
     for (var y = 0; y < height; y++) {
-      var r = 255 * y.toDouble() / width.toDouble();
-      var g = 255 * x.toDouble() / height.toDouble();
+      var r = y.toDouble() / width.toDouble();
+      var g = x.toDouble() / height.toDouble();
       var b = 0.0;
       pixels[x + (y * width)] = Pixel(r, g, b);
     }

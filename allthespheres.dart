@@ -22,8 +22,8 @@ void main() {
   Image im = Image(width, height);
 
   // Image is prepped - draw!
-  Material ivory = Material(Pixel.fromFraction(0.4, 0.4, 0.3));
-  Material red_rubber = Material(Pixel.fromFraction(0.3, 0.1, 0.1));
+  Material ivory = Material(Vector2(1.0, 1.0), Pixel(0.4, 0.4, 0.3), 10);
+  Material red_rubber = Material(Vector2(1.0, 1.0), Pixel(0.3, 0.1, 0.1), 10);
 
   List<Sphere> spheres = List<Sphere>();
 
@@ -67,10 +67,10 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
 
 Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres) {
   Vector3 point, N;
-  Material material = Material(Pixel(0, 0, 128));
+  Material material = Material(Vector2(0, 0), Pixel(0, 0, 128), 0);
 
   if (!sceneIntersect(origin, direction, spheres, point, N, material)) {
-    return Pixel.fromFraction(0.2, 0.7, 0.8);
+    return Pixel(0.2, 0.7, 0.8);
   }
 
   return material.diffuseColour;

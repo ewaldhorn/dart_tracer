@@ -16,7 +16,6 @@ class PostProcessor {
     var maxsize = srcImage.width * srcImage.height * 4;
     for (var pos = 0; pos < maxsize; pos += 4) {
       var pix = pixels[pixelpos];
-
       imagePixels[pos] = Pixel.toPixelValue(pix.r);
       imagePixels[pos + 1] = Pixel.toPixelValue(pix.g);
       imagePixels[pos + 2] = Pixel.toPixelValue(pix.b);

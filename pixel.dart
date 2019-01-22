@@ -7,14 +7,20 @@ class Pixel {
     this.b = b;
   }
 
-  Pixel.fromFraction(double r, double g, double b) {
-    this.r = 255 * r;
-    this.g = 255 * g;
-    this.b = 255 * b;
+  operator + (Pixel p) {
+    return Pixel(this.r + p.r, this.g + p.g, this.b + p.b);
+  }
+
+  timesDouble(double d) {
+    return Pixel(this.r * d, this.g * d, this.b * d);
+  }
+
+  combineWith(Pixel p) {
+    return Pixel(this.r + p.r, this.g + g, this.b + p.b);
   }
 
   static int toPixelValue(double val) {
-    return val.toInt().clamp(0, 255);
+    return (255 * val).clamp(0, 255).toInt();
   }
 
   @override
