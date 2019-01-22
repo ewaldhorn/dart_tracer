@@ -8,7 +8,6 @@ import 'package:image/image.dart';
  */
 
 void main() {
-  print("Started");
   Image image = Image(1024, 768);
 
   fill(image, getColor(255, 255, 255));
