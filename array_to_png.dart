@@ -28,11 +28,11 @@ void main() {
       var r = rnd.nextInt(maxColourValue).toDouble();
       var g = rnd.nextInt(maxColourValue).toDouble();
       var b = rnd.nextInt(maxColourValue).toDouble();
-      pixels[x + (y*width)] = Pixel(r, g, b);
+      pixels[x + (y * width)] = Pixel(r, g, b);
     }
   }
 
-  var pixelpos = 0;  
+  var pixelpos = 0;
   var maxsize = width * height * 4;
   for (var pos = 0; pos < maxsize; pos += 4) {
     var pix = pixels[pixelpos];
