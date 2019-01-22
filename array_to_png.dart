@@ -25,9 +25,9 @@ void main() {
 
   for (var x = 0; x < width; x++) {
     for (var y = 0; y < height; y++) {
-      var r = rnd.nextInt(maxColourValue);
-      var g = rnd.nextInt(maxColourValue);
-      var b = rnd.nextInt(maxColourValue);
+      var r = rnd.nextInt(maxColourValue).toDouble();
+      var g = rnd.nextInt(maxColourValue).toDouble();
+      var b = rnd.nextInt(maxColourValue).toDouble();
       pixels[x + (y*width)] = Pixel(r, g, b);
     }
   }
@@ -37,9 +37,9 @@ void main() {
   for (var pos = 0; pos < maxsize; pos += 4) {
     var pix = pixels[pixelpos];
 
-    imagePixels[pos] = pix.r;
-    imagePixels[pos + 1] = pix.g;
-    imagePixels[pos + 2] = pix.b;
+    imagePixels[pos] = pix.r.toInt();
+    imagePixels[pos + 1] = pix.g.toInt();
+    imagePixels[pos + 2] = pix.b.toInt();
     imagePixels[pos + 3] = 255;
 
     pixelpos += 1;

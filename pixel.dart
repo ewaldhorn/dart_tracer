@@ -1,7 +1,7 @@
 class Pixel {
-  int r, g, b;
+  double r, g, b;
 
-  Pixel(int r, int g, int b) {
+  Pixel(double r, double g, double b) {
     this.r = r;
     this.g = g;
     this.b = b;
