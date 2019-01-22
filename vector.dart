@@ -15,10 +15,7 @@ class Vector3 {
 
   Vector3 normalise({double l = 1.0}) {
     double t = l / norm();
-    this.x *= t;
-    this.y *= t;
-    this.z *= t;
-    return this;
+    return Vector3(this.x * t, this.y * t, this.z * t);
   }
 
   timesDouble(double d) {
