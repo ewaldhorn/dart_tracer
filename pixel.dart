@@ -6,4 +6,8 @@ class Pixel {
     this.g = g;
     this.b = b;
   }
+
+  static int toPixelValue(double val) {
+    return val.toInt().clamp(0, 255);
+  }
 }
