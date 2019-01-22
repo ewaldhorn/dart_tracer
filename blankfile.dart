@@ -1,5 +1,6 @@
 import 'dart:io' as IO;
 import 'package:image/image.dart';
+import 'openfile.dart';
 
 /**
  * Create a blank image.
@@ -15,5 +16,5 @@ void main() {
   List<int> png = encodePng(image);
   new IO.File('basic.png').writeAsBytesSync(png);
 
-  IO.Process.run('open', ['-a','Preview', 'basic.png']);
+  OpenFile().openFileInPreview('basic.png');
 }

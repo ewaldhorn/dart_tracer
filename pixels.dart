@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:image/image.dart';
+import 'openfile.dart';
 
 /**
  * Create and populate an image with random pixels.
@@ -33,5 +34,5 @@ void main() {
   new File('randompixels.png').writeAsBytesSync(png);
 
   // Open the file in the Mac previewer
-  Process.run('open', ['-a', 'Preview', 'randompixels.png']);
+  OpenFile().openFileInPreview('randompixels.png');
 }
