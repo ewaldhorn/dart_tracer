@@ -6,7 +6,7 @@ I followed the excellent tutorial by [Dmitry V. Sokolov aka ssloy](https://githu
 
 ## Disclaimer
 
-I have been doing a lot of Python and JavaScript of late, so my Dart is very rusty! None of this is best practice or even good code. The fact that it runs in incidental.  If it works for you, awesome. If it doesn't, sorry!
+I have been doing a lot of Python and JavaScript of late, so my Dart is very rusty! None of this is best practice or even good code. The fact that it even runs is incidental.  If it works for you, awesome. If it doesn't, sorry!
 
 ### Please Note
 
