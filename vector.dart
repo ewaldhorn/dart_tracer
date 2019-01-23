@@ -18,8 +18,21 @@ class Vector3 {
     this.z = z;
   }
 
+  Vector3.zero() {
+    this.x = 0;
+    this.y = 0;
+    this.z = 0;
+  }
+
   String toString() {
     return "Instance of Vector3(${x}, ${y}, ${z})";
+  }
+
+  Vector3 setTo(Vector3 vec) {
+    x = vec.x;
+    y = vec.y;
+    z = vec.z;
+    return this;
   }
 
   double norm() {
@@ -28,29 +41,38 @@ class Vector3 {
 
   Vector3 normalise({double l = 1.0}) {
     double t = l / norm();
-    x *= t; 
-    y *= t; 
+    x *= t;
+    y *= t;
     z *= t;
     return this;
   }
 
   Vector3 timesDouble(double d) {
     x *= d;
-    y *= d; 
+    y *= d;
     z *= d;
     return this;
   }
 
-  operator -(Vector3 vec) {
-    return Vector3(this.x - vec.x, this.y - vec.y, this.z - vec.z);
+  Vector3 operator -(Vector3 vec) {
+    x -= vec.x;
+    y - vec.y;
+    z -= vec.z;
+    return this;
   }
 
-  operator +(Vector3 vec) {
-    return Vector3(this.x + vec.x, this.y + vec.y, this.z + vec.z);
+  Vector3 operator +(Vector3 vec) {
+    x += vec.x;
+    y += vec.y; 
+    z += vec.z;
+    return this;
   }
 
-  operator *(Vector3 vec) {
-    return Vector3(this.x * vec.x, this.y * vec.y, this.z * vec.z);
+  Vector3 operator *(Vector3 vec) {
+    x *= vec.x; 
+    y *= vec.y; 
+    z *= vec.z;
+    return this;
   }
 
   // We can override according to return type in C++, not sure how to do that in Dart, so I'm using a different symbol
