@@ -28,11 +28,17 @@ class Vector3 {
 
   Vector3 normalise({double l = 1.0}) {
     double t = l / norm();
-    return Vector3(this.x * t, this.y * t, this.z * t);
+    x *= t; 
+    y *= t; 
+    z *= t;
+    return this;
   }
 
-  timesDouble(double d) {
-    return Vector3(this.x * d, this.y * d, this.z * d);
+  Vector3 timesDouble(double d) {
+    x *= d;
+    y *= d; 
+    z *= d;
+    return this;
   }
 
   operator -(Vector3 vec) {
@@ -51,9 +57,9 @@ class Vector3 {
   operator &(Vector3 dir) {
     double result = 0.0;
 
-    result = this.x * dir.x;
-    result += this.y * dir.y;
-    result += this.z * dir.z;
+    result = x * dir.x;
+    result += y * dir.y;
+    result += z * dir.z;
 
     return result;
   }

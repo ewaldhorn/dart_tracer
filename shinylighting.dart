@@ -54,7 +54,8 @@ void main() {
     for (var y = 0; y < height; y++) {
       double xp = (2 * (x + 0.5) / width - 1) * tan(FOV / 2.0) * width / height;
       double yp = -(2 * (y + 0.5) / height - 1) * tan(FOV / 2.0);
-      Vector3 direction = Vector3(xp, yp, -1).normalise();
+      Vector3 direction = Vector3(xp, yp, -1);
+      direction.normalise();
       pixels[x + (y * width)] =
           castRay(Vector3(0, 0, 0), direction, spheres, lights);
     }
@@ -75,7 +76,7 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
       spheresDistance = dist_i;
       hit = origin + direction.timesDouble(dist_i);
       N = (hit - spheres[i].center);
-      N = N.normalise();
+      N.normalise();
       material.setDiffuseColour(spheres[i].material.diffuseColour);
     }
   }
@@ -93,12 +94,12 @@ Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres,
 
   for (var i = 0; i < lights.length; i++) {
     Vector3 lightdir = (lights[i].position - hit);
-    lightdir = lightdir.normalise();
+    lightdir.normalise();
     diffuse_light_intensity += lights[i].intensity * max(0.0, lightdir & N);
     Vector3 ref = reflect(lightdir.timesDouble(-1.0), N).timesDouble(-1);
     specular_light_intensity = pow(max(0.0, direction & ref), material.specularExponent)*lights[i].intensity;
   }
 
   return material.timesDouble(diffuse_light_intensity * material.albedo.x) +
-      Pixel(1.0, 1.0, 1.0).timesDouble(specular_light_intensity * material.albedo.y);
+      Pixel(50.0, 50.0, 50.0).timesDouble(specular_light_intensity * material.albedo.y);
 }
