@@ -45,9 +45,9 @@ void main() {
   spheres.add(Sphere(Vector3(-3, 0, -16), 2.0, ivory));
 
   List<Lighting> lights = List<Lighting>();
-  lights.add(Lighting(Vector3(30, 20, 30), 1.7));
   lights.add(Lighting(Vector3(30, 50, -25), 1.8));
   lights.add(Lighting(Vector3(-20, 20, 20), 1.5));
+  lights.add(Lighting(Vector3(30, 20, 30), 1.7));
 
   // Ray casting is triggered from here
   for (var x = 0; x < width; x++) {
@@ -95,8 +95,10 @@ Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres,
     Vector3 lightdir = (lights[i].position - hit);
     lightdir = lightdir.normalise();
     diffuse_light_intensity += lights[i].intensity * max(0.0, lightdir & N);
+    Vector3 ref = reflect(lightdir.timesDouble(-1.0), N).timesDouble(-1);
+    specular_light_intensity = pow(max(0.0, direction & ref), material.specularExponent)*lights[i].intensity;
   }
 
   return material.timesDouble(diffuse_light_intensity * material.albedo.x) +
-      Pixel(255, 255, 255).timesDouble(specular_light_intensity * material.albedo.y);
+      Pixel(1.0, 1.0, 1.0).timesDouble(specular_light_intensity * material.albedo.y);
 }
