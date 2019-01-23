@@ -35,9 +35,9 @@ class Pixel {
   }
 
   Pixel combineWith(Pixel p) {
-    r + p.r;
-    g + p.g;
-    b + p.b;
+    r += p.r;
+    g += p.g;
+    b += p.b;
     return this;
   }
 
