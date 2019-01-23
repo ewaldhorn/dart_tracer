@@ -14,7 +14,7 @@ void main() {
   fill(image, getColor(255, 255, 255));
 
   List<int> png = encodePng(image);
-  new IO.File('blank.png').writeAsBytesSync(png);
+  new IO.File('output_blank.png').writeAsBytesSync(png);
 
-  OpenFile().openFileInPreview('blank.png');
+  OpenFile().openFileInPreview('output_blank.png');
 }

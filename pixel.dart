@@ -7,16 +7,25 @@ class Pixel {
     this.b = b;
   }
 
-  operator + (Pixel p) {
-    return Pixel(this.r + p.r, this.g + p.g, this.b + p.b);
+  Pixel operator +(Pixel p) {
+    r += p.r;
+    g += p.g;
+    b += p.b;
+    return this;
   }
 
-  timesDouble(double d) {
-    return Pixel(this.r * d, this.g * d, this.b * d);
+  Pixel timesDouble(double d) {
+    r *= d;
+    g *= d;
+    b *= d;
+    return this;
   }
 
-  combineWith(Pixel p) {
-    return Pixel(this.r + p.r, this.g + g, this.b + p.b);
+  Pixel combineWith(Pixel p) {
+    r + p.r;
+    g + p.g;
+    b + p.b;
+    return this;
   }
 
   static int toPixelValue(double val) {

@@ -31,8 +31,8 @@ void main() {
 
   // Done Drawing, now save it.
   List<int> png = encodePng(image);
-  new File('randompixels.png').writeAsBytesSync(png);
+  new File('output_randompixels.png').writeAsBytesSync(png);
 
   // Open the file in the Mac previewer
-  OpenFile().openFileInPreview('randompixels.png');
+  OpenFile().openFileInPreview('output_randompixels.png');
 }

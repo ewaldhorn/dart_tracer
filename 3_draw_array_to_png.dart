@@ -49,8 +49,8 @@ void main() {
 
   // Done Drawing, now save it.
   List<int> png = encodePng(image);
-  new File('arraypixels.png').writeAsBytesSync(png);
+  new File('output_arraypixels.png').writeAsBytesSync(png);
 
   // Open the file in the Mac previewer
-  OpenFile().openFileInPreview('arraypixels.png');
+  OpenFile().openFileInPreview('output_arraypixels.png');
 }
