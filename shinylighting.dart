@@ -30,8 +30,6 @@ void main() {
   List<Pixel> pixels = List<Pixel>(width * height);
   Image im = Image(width, height);
 
-// Should store pixels as fractions until final render.  fok
-
   // Image is prepped - draw!
   Material ivory =
       Material(Vector2(0.6, 0.3), Pixel(0.4, 0.4, 0.3), 50);
@@ -75,8 +73,7 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
         (dist_i < spheresDistance)) {
       spheresDistance = dist_i;
       hit = origin + direction.timesDouble(dist_i);
-      N = (hit - spheres[i].center);
-      N.normalise();
+      N = (hit - spheres[i].center).normalise();
       material.setDiffuseColour(spheres[i].material.diffuseColour);
     }
   }
@@ -93,13 +90,12 @@ Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres,
   double diffuse_light_intensity = 0.0, specular_light_intensity = 0.0;
 
   for (var i = 0; i < lights.length; i++) {
-    Vector3 lightdir = (lights[i].position - hit);
-    lightdir.normalise();
+    Vector3 lightdir = (lights[i].position - hit).normalise();
     diffuse_light_intensity += lights[i].intensity * max(0.0, lightdir & N);
     Vector3 ref = reflect(lightdir.timesDouble(-1.0), N).timesDouble(-1);
     specular_light_intensity = pow(max(0.0, direction & ref), material.specularExponent)*lights[i].intensity;
   }
 
   return material.timesDouble(diffuse_light_intensity * material.albedo.x) +
-      Pixel(50.0, 50.0, 50.0).timesDouble(specular_light_intensity * material.albedo.y);
+      Pixel(1.0, 1.0, 1.0).timesDouble(specular_light_intensity * material.albedo.y);
 }
