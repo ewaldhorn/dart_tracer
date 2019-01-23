@@ -13,8 +13,8 @@ import 'sphere.dart';
  */
 
 void main() {
-  const width = 640;
-  const height = 480;
+  const width = 1024;
+  const height = 768;
   const FOV = pi / 2.0;
 
   List<Pixel> pixels = List<Pixel>(width * height);

@@ -16,8 +16,8 @@ class Material {
     diffuseColour = p;
   }
 
-  timesDouble(double d) {
-    return Pixel(this.diffuseColour.r * d, this.diffuseColour.g * d,
-        this.diffuseColour.b * d);
+  Pixel timesDouble(double d) {
+    diffuseColour.timesDouble(d);
+    return diffuseColour;
   }
 }

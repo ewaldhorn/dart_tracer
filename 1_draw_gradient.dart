@@ -10,8 +10,8 @@ import 'pixel.dart';
  */
 
 void main() {
-  const width = 640;
-  const height = 480;
+  const width = 1024;
+  const height = 768;
 
   List<Pixel> pixels = List<Pixel>(width * height);
   Image im = Image(width, height);

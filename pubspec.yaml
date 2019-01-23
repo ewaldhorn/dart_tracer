@@ -1,4 +1,4 @@
-name: dart_traver
+name: dart_tracer
 version: 1.0.0
 author: Ewald Horn <ewald@nofuss.co.za>
 description: Attempting to do some ray tracing in Dart.

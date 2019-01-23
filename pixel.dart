@@ -7,6 +7,19 @@ class Pixel {
     this.b = b;
   }
 
+  Pixel.zero() {
+    this.r = 0.0;
+    this.g = 0.0;
+    this.b = 0.0;
+  }
+
+  Pixel add(double ar, double ag, double ab) {
+    r += ar;
+    g += ag;
+    b += ab;
+    return this;
+  }
+
   Pixel operator +(Pixel p) {
     r += p.r;
     g += p.g;
