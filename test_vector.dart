@@ -89,13 +89,13 @@ void main() {
       var w = Vector3(0.5, 0.0, 0.8);
       var x = v - w;
 
-      expect(v.x, equals(3.0));
+      expect(v.x, equals(3.5));
       expect(v.y, equals(5.0));
-      expect(v.z, equals(10.0));
+      expect(v.z, equals(10.8));
 
-      expect(x.x, equals(v.x));
-      expect(x.y, equals(v.y));
-      expect(x.z, equals(v.z));
+      expect(x.x, equals(3.0));
+      expect(x.y, equals(5.0));
+      expect(x.z, equals(10.0));
     });
 
     test("Can run + on a vector.", () {
@@ -103,13 +103,13 @@ void main() {
       var w = Vector3(0.5, 0.0, 0.8);
       var x = v + w;
 
-      expect(v.x, equals(3.5));
+      expect(v.x, equals(3.0));
       expect(v.y, equals(5.0));
-      expect(v.z, equals(10.8));
+      expect(v.z, equals(10.0));
 
-      expect(x.x, equals(v.x));
-      expect(x.y, equals(v.y));
-      expect(x.z, equals(v.z));
+      expect(x.x, equals(3.5));
+      expect(x.y, equals(5.0));
+      expect(x.z, equals(10.8));
     });
 
     test("Can run * 1 on a vector.", () {
@@ -118,12 +118,12 @@ void main() {
       var x = v * w;
 
       expect(v.x, equals(3.0));
-      expect(v.y, equals(0.0));
+      expect(v.y, equals(5.0));
       expect(v.z, equals(10.0));
 
-      expect(x.x, equals(v.x));
-      expect(x.y, equals(v.y));
-      expect(x.z, equals(v.z));
+      expect(x.x, equals(3.0));
+      expect(x.y, equals(0.0));
+      expect(x.z, equals(10.0));
     });
 
     test("Can run * 0.5 on a vector.", () {
@@ -131,13 +131,13 @@ void main() {
       var w = Vector3(0.5, 0.5, 0.5);
       var x = v * w;
 
-      expect(v.x, equals(1.5));
-      expect(v.y, equals(2.5));
-      expect(v.z, equals(5.0));
+      expect(v.x, equals(3.0));
+      expect(v.y, equals(5.0));
+      expect(v.z, equals(10.0));
 
-      expect(x.x, equals(v.x));
-      expect(x.y, equals(v.y));
-      expect(x.z, equals(v.z));
+      expect(x.x, equals(1.5));
+      expect(x.y, equals(2.5));
+      expect(x.z, equals(5.0));
     });
 
     test("Can run & on a vector. (1/2)", () {

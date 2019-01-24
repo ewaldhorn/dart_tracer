@@ -41,6 +41,17 @@ class Pixel {
     return this;
   }
 
+  Pixel setTo(Pixel p) {
+    r = p.r;
+    g = p.g;
+    b = p.b;
+    return this;
+  }
+
+  Pixel operator *(double d) {
+    return Pixel(r * d, g * d, b * d);
+  }
+
   static int toPixelValue(double val) {
     return (255 * val).clamp(0, 255).toInt();
   }

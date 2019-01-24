@@ -13,7 +13,7 @@ class Material {
   }
 
   void setDiffuseColour(Pixel p) {
-    diffuseColour = p;
+    diffuseColour.setTo(p);
   }
 
   Pixel timesDouble(double d) {

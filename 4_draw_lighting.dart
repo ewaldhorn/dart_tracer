@@ -5,6 +5,7 @@ import 'vector.dart';
 import 'sphere.dart';
 import 'postprocessor.dart';
 import 'material.dart';
+import 'lighting.dart';
 
 /**
  * Draw a lot of spheres!
@@ -25,20 +26,24 @@ void main() {
   Material ivory = Material(Vector2(1.0, 1.0), Pixel(0.4, 0.4, 0.3), 10);
   Material red_rubber = Material(Vector2(1.0, 1.0), Pixel(0.3, 0.1, 0.1), 10);
 
-  List<Sphere> spheres = List<Sphere>();
+  List<Sphere> spheres = List();
 
   spheres.add(Sphere(Vector3(-3, 0, -16), 2.0, ivory));
   spheres.add(Sphere(Vector3(-1, -1.5, -12), 2.0, red_rubber));
   spheres.add(Sphere(Vector3(1.5, -0.5, -18), 3.0, red_rubber));
   spheres.add(Sphere(Vector3(7, 5, -18), 4.0, ivory));
 
+  List<Lighting> lights = List();
+  lights.add(Lighting(Vector3(-20, 20, 20), 1.5));
+
   // Ray casting is triggered from here
-  for (var x = 0; x < width; x++) {
-    for (var y = 0; y < height; y++) {
-      double xp = (2 * (x + 0.5) / width - 1) * tan(FOV / 2.0) * width / height;
-      double yp = -(2 * (y + 0.5) / height - 1) * tan(FOV / 2.0);
+  for (var j = 0; j < height; j++) {
+    for (var i = 0; i < width; i++) {
+      double xp = (2 * (i + 0.5) / width - 1) * tan(FOV / 2.0) * width / height;
+      double yp = -(2 * (j + 0.5) / height - 1) * tan(FOV / 2.0);
       Vector3 direction = Vector3(xp, yp, -1).normalise();
-      pixels[x + (y * width)] = castRay(Vector3(0, 0, 0), direction, spheres);
+      pixels[i + (j * width)] =
+          castRay(Vector3(0, 0, 0), direction, spheres, lights);
     }
   }
 
@@ -56,7 +61,7 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
         (dist_i < spheresDistance)) {
       spheresDistance = dist_i;
       hit.setTo(origin + direction.timesDouble(dist_i));
-      N.setTo((hit - spheres[i].center).normalise());
+      N.setTo((hit - spheres[i].center)).normalise();
       material.setDiffuseColour(spheres[i].material.diffuseColour);
     }
   }
@@ -64,7 +69,8 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
   return spheresDistance < 1000;
 }
 
-Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres) {
+Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres,
+    List<Lighting> lights) {
   Vector3 point = Vector3.zero(), N = Vector3.zero();
   Material material = Material(Vector2(0, 0), Pixel(0, 0, 128), 0);
 
@@ -72,5 +78,11 @@ Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres) {
     return Pixel(0.2, 0.7, 0.8);
   }
 
-  return material.diffuseColour;
+  double diffuse_light_intensity = 0;
+  for (var i = 0; i < lights.length; i++) {
+    var light_dir = (lights[i].position - point).normalise();
+    diffuse_light_intensity += lights[i].intensity * max(0.0, light_dir & N);
+  }
+
+  return material.diffuseColour * diffuse_light_intensity;
 }

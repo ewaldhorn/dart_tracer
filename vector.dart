@@ -25,7 +25,7 @@ class Vector3 {
   }
 
   String toString() {
-    return "Instance of Vector3(${x}, ${y}, ${z})";
+    return "Vector3(${x}, ${y}, ${z})";
   }
 
   Vector3 setTo(Vector3 vec) {
@@ -55,24 +55,15 @@ class Vector3 {
   }
 
   Vector3 operator -(Vector3 vec) {
-    x -= vec.x;
-    y -= vec.y;
-    z -= vec.z;
-    return this;
+    return Vector3(x - vec.x, y - vec.y, z - vec.z);
   }
 
   Vector3 operator +(Vector3 vec) {
-    x += vec.x;
-    y += vec.y; 
-    z += vec.z;
-    return this;
+    return Vector3(x + vec.x, y + vec.y, z + vec.z);
   }
 
   Vector3 operator *(Vector3 vec) {
-    x *= vec.x; 
-    y *= vec.y; 
-    z *= vec.z;
-    return this;
+    return Vector3(x * vec.x, y * vec.y, z * vec.z);
   }
 
   // We can override according to return type in C++, not sure how to do that in Dart, so I'm using a different symbol
