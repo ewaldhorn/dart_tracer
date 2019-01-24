@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Pixel {
   double r, g, b;
 
@@ -45,6 +47,17 @@ class Pixel {
     r = p.r;
     g = p.g;
     b = p.b;
+    return this;
+  }
+
+  Pixel normalise() {
+    var mx = max(r, max(g, b));
+    if (mx > 1) {
+      var c = 1.0 / mx;
+      r = r * c;
+      g = g * c;
+      b = b * c;
+    }
     return this;
   }
 

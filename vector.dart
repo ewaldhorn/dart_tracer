@@ -66,6 +66,10 @@ class Vector3 {
     return Vector3(x * vec.x, y * vec.y, z * vec.z);
   }
 
+  Vector3 operator ^(double d) {
+    return Vector3(x * d, y * d, z * d);
+  }
+
   // We can override according to return type in C++, not sure how to do that in Dart, so I'm using a different symbol
   double operator &(Vector3 dir) {
     double result = 0.0;
