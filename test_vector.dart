@@ -70,5 +70,18 @@ void main() {
       expect(v.y, equals(ny));
       expect(v.z, equals(nz));
     });
+
+    test("Can times a vector with a double.", (){
+      var v = Vector3(5.5, 10.5, 20.5);
+      var w = v.timesDouble(0.5);
+
+      expect(true, isAcceptable(v.x, 2.75));
+      expect(true, isAcceptable(v.y, 5.25));
+      expect(true, isAcceptable(v.z, 10.25));
+
+      expect(v.x, equals(w.x));
+      expect(v.y, equals(w.y));
+      expect(v.z, equals(w.z));
+    });
   });
 }
