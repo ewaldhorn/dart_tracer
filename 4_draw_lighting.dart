@@ -59,8 +59,14 @@ bool sceneIntersect(Vector3 origin, Vector3 direction, List<Sphere> spheres,
     if (spheres[i].rayIntersect(origin, direction, dist_i) &&
         (dist_i < spheresDistance)) {
       spheresDistance = dist_i;
-      hit.setTo(origin + direction.timesDouble(dist_i));
-      N.setTo((hit - spheres[i].center)).normalise();
+      var v = origin;
+      v.timesDouble(dist_i);
+      //hit.setTo(origin + direction.timesDouble(dist_i));
+      hit.setTo(v);
+      var n = hit;
+      n - spheres[i].center;
+      N.setTo(n);
+      N.normalise();
       material.setDiffuseColour(spheres[i].material.diffuseColour);
     }
   }
@@ -82,6 +88,5 @@ Pixel castRay(Vector3 origin, Vector3 direction, List<Sphere> spheres,
     diffuse_light_intensity += lights[i].intensity * max(0.0, lightdir & N);
   }
 
-return material.diffuseColour;
-  // return material.timesDouble(diffuse_light_intensity);
+  return material.timesDouble(diffuse_light_intensity);
 }

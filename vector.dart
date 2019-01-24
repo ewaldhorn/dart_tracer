@@ -76,7 +76,7 @@ class Vector3 {
   }
 
   // We can override according to return type in C++, not sure how to do that in Dart, so I'm using a different symbol
-  operator &(Vector3 dir) {
+  double operator &(Vector3 dir) {
     double result = 0.0;
 
     result += x * dir.x;

@@ -51,9 +51,9 @@ void main() {
       expect(true, isAcceptable(v.norm(), 3.74165738677)); // sqrt(14)
     });
 
-    test("Can normalise a vector.", (){
+    test("Can normalise a vector.", () {
       var v = Vector3(2, 3, 4);
-      
+
       var norm = v.norm();
       var t = 1.0 / norm;
       var nx = 2 * t;
@@ -71,7 +71,7 @@ void main() {
       expect(v.z, equals(nz));
     });
 
-    test("Can times a vector with a double.", (){
+    test("Can times a vector with a double.", () {
       var v = Vector3(5.5, 10.5, 20.5);
       var w = v.timesDouble(0.5);
 
@@ -82,6 +82,86 @@ void main() {
       expect(v.x, equals(w.x));
       expect(v.y, equals(w.y));
       expect(v.z, equals(w.z));
+    });
+
+    test("Can run - on a vector.", () {
+      var v = Vector3(3.5, 5.0, 10.8);
+      var w = Vector3(0.5, 0.0, 0.8);
+      var x = v - w;
+
+      expect(v.x, equals(3.0));
+      expect(v.y, equals(5.0));
+      expect(v.z, equals(10.0));
+
+      expect(x.x, equals(v.x));
+      expect(x.y, equals(v.y));
+      expect(x.z, equals(v.z));
+    });
+
+    test("Can run + on a vector.", () {
+      var v = Vector3(3.0, 5.0, 10.0);
+      var w = Vector3(0.5, 0.0, 0.8);
+      var x = v + w;
+
+      expect(v.x, equals(3.5));
+      expect(v.y, equals(5.0));
+      expect(v.z, equals(10.8));
+
+      expect(x.x, equals(v.x));
+      expect(x.y, equals(v.y));
+      expect(x.z, equals(v.z));
+    });
+
+    test("Can run * 1 on a vector.", () {
+      var v = Vector3(3.0, 5.0, 10.0);
+      var w = Vector3(1.0, 0.0, 1.0);
+      var x = v * w;
+
+      expect(v.x, equals(3.0));
+      expect(v.y, equals(0.0));
+      expect(v.z, equals(10.0));
+
+      expect(x.x, equals(v.x));
+      expect(x.y, equals(v.y));
+      expect(x.z, equals(v.z));
+    });
+
+    test("Can run * 0.5 on a vector.", () {
+      var v = Vector3(3.0, 5.0, 10.0);
+      var w = Vector3(0.5, 0.5, 0.5);
+      var x = v * w;
+
+      expect(v.x, equals(1.5));
+      expect(v.y, equals(2.5));
+      expect(v.z, equals(5.0));
+
+      expect(x.x, equals(v.x));
+      expect(x.y, equals(v.y));
+      expect(x.z, equals(v.z));
+    });
+
+    test("Can run & on a vector. (1/2)", () {
+      var v = Vector3(3.0, 5.0, 10.0);
+      var w = Vector3(1.0, 0.0, 1.0);
+      var x = v & w;
+
+      expect(v.x, equals(3.0));
+      expect(v.y, equals(5.0));
+      expect(v.z, equals(10.0));
+
+      expect(x, equals(13.0));
+    });
+
+    test("Can run & on a vector. (2/2)", () {
+      var v = Vector3(3.0, 5.0, 10.0);
+      var w = Vector3(0.5, 0.5, 0.5);
+      var x = v & w;
+
+      expect(v.x, equals(3.0));
+      expect(v.y, equals(5.0));
+      expect(v.z, equals(10.0));
+
+      expect(x, equals(9.0));
     });
   });
 }
