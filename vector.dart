@@ -56,7 +56,7 @@ class Vector3 {
 
   Vector3 operator -(Vector3 vec) {
     x -= vec.x;
-    y - vec.y;
+    y -= vec.y;
     z -= vec.z;
     return this;
   }
@@ -79,7 +79,7 @@ class Vector3 {
   operator &(Vector3 dir) {
     double result = 0.0;
 
-    result = x * dir.x;
+    result += x * dir.x;
     result += y * dir.y;
     result += z * dir.z;
 

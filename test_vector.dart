@@ -50,5 +50,25 @@ void main() {
       var v = Vector3(1, 2, 3); // 14
       expect(true, isAcceptable(v.norm(), 3.74165738677)); // sqrt(14)
     });
+
+    test("Can normalise a vector.", (){
+      var v = Vector3(2, 3, 4);
+      
+      var norm = v.norm();
+      var t = 1.0 / norm;
+      var nx = 2 * t;
+      var ny = 3 * t;
+      var nz = 4 * t;
+
+      var w = v.normalise();
+
+      expect(v.x, equals(w.x));
+      expect(v.y, equals(w.y));
+      expect(v.z, equals(w.z));
+
+      expect(v.x, equals(nx));
+      expect(v.y, equals(ny));
+      expect(v.z, equals(nz));
+    });
   });
 }
