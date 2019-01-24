@@ -24,7 +24,7 @@ class Sphere {
     t0 = tca - thc;
     double t1 = tca + thc;
 
-    if (t0 < 0) t0 - t1;
+    if (t0 < 0) t0 = t1;
     if (t0 < 0) return false;
 
     return true;
